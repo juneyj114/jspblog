@@ -25,7 +25,7 @@
 									<p>${board.createDate}</p>
 								</div>
 								<div class="d-flex">
-									<img src="${board.user.userProfile}" alt="" style="width: 50px; height: 50px;">
+									<img src="${board.user.userProfile}" alt="" style="width:50px; height:50px;">
 								</div>
 							</div>
 						</div>
@@ -45,7 +45,7 @@
 							<div id="reply-${comment.id}" style="flex-wrap: wrap" class="single-comment justify-content-between d-flex">
 								<div class="user justify-content-between d-flex">
 									<div class="thumb">
-										<img src="${comment.user.userProfile}" alt="" style="width: 50px; height: 50px;">
+										<img src="${comment.user.userProfile}" alt="" style="width:50px; height:50px;">
 									</div>
 									<div class="desc">
 										<h5>
@@ -59,7 +59,7 @@
 									<button class="btn-reply text-uppercase" onclick="deleteReply(${comment.id})">❌</button>
 								</div>
 								<div class="reply-btn">
-									<button onclick="showReply(${comment.id})" class="btn-reply text-uppercase">댓글보기</button>
+									<button onclick = "showReply(${comment.id})" class="btn-reply text-uppercase">댓글보기</button>
 									<button id="btnWriteComment-${ comment.id }" class="btn-reply text-uppercase" onclick="writeReply(${comment.id})">댓글쓰기</button>
 								</div>
 							</div>
@@ -69,7 +69,7 @@
 					</c:forEach>
 
 					<!-- 대 댓글 아이템 시작 -->
-
+					
 					<!-- 대 댓글 아이템 끝 -->
 				</div>
 				<!-- 댓글 끝 -->
@@ -209,7 +209,6 @@ async function showReply(commentId) {
       });
       const replies = await fetchData.json();
       const childReply = document.createElement("div");
-      childReply.style.width = "100%"; 
       childReply.id = "childReply-" + commentId;
       $("#reply-" + commentId).append(childReply);
       for (const reply of replies) {
@@ -302,7 +301,7 @@ async function showReply(commentId) {
       } = resData;
       if(status === "OK"){
         const div = document.createElement("div");
-        div.innerHTML = "<div style='margin-left: 50px;' class='comment-list' id='reply-"+id+"'><div class='single-comment justify-content-between d-flex'><div class='user justify-content-between d-flex'><div class='thumb'><img src='"+userProfile+"' alt='' style='height:50px; width:50px;'></div><div class='desc'><h5><a href='#'>"+username+"</a></h5><p class='date'>"+createDate+"</p><p class='comment'>"+content+"</p></div></div><div class='reply-btn'><button class='btn-reply text-uppercase' onclick='deleteReply("+id+")'>❌</button></div><div class='reply-btn'><button class='btn-reply text-uppercase'>댓글보기</button><button id='btnWriteComment-"+id+"' class='btn-reply text-uppercase' onclick='writeReply("+id+")'>댓글쓰기</button></div></div></div>";
+        div.innerHTML = "<div style='margin-left: 50px;' class='comment-list' id='comment-"+id+"'><div class='single-comment justify-content-between d-flex'><div class='user justify-content-between d-flex'><div class='thumb'><img src='"+userProfile+"' alt='' style='height:50px; width:50px;'></div><div class='desc'><h5><a href='#'>"+username+"</a></h5><p class='date'>"+createDate+"</p><p class='comment'>"+content+"</p></div></div><div class='reply-btn'><button class='btn-reply text-uppercase' onclick='deleteReply("+id+")'>❌</button></div><div class='reply-btn'><button class='btn-reply text-uppercase'>댓글보기</button><button id='btnWriteComment-"+id+"' class='btn-reply text-uppercase' onclick='writeReply("+id+")'>댓글쓰기</button></div></div></div>";
         console.log(div);
         $("#childReply-"+commentId).append(div);
         
@@ -338,7 +337,7 @@ async function showReply(commentId) {
       } = resData;
       if(status === "OK"){
         const div = document.createElement("div");
-        div.innerHTML = "<div class='comment-list' id='comment-"+id+"'><div id = 'reply-"+id+"' class='single-comment justify-content-between d-flex'><div class='user justify-content-between d-flex'><div class='thumb'><img src='"+userProfile+"' alt=''style='width: 50px; height: 50px;'></div><div class='desc'><h5><a href='#'>"+username+"</a></h5><p class='date'>"+createDate+"</p><p class='comment'>"+content+"</p></div></div><div class='reply-btn'><button class='btn-reply text-uppercase' onclick='deleteReply("+id+")'>❌</button></div><div class='reply-btn'><button class='btn-reply text-uppercase'>댓글보기</button><button id='btnWriteComment-"+id+"' class='btn-reply text-uppercase' onclick='writeReply("+id+")'>댓글쓰기</button></div></div></div>";
+        div.innerHTML = "<div class='comment-list' id='comment-"+id+"'><div class='single-comment justify-content-between d-flex'><div class='user justify-content-between d-flex'><div class='thumb'><img src='"+userProfile+"' alt=''style='width: 50px; height: 50px;'></div><div class='desc'><h5><a href='#'>"+username+"</a></h5><p class='date'>"+createDate+"</p><p class='comment'>"+content+"</p></div></div><div class='reply-btn'><button class='btn-reply text-uppercase' onclick='deleteReply("+id+")'>❌</button></div><div class='reply-btn'><button class='btn-reply text-uppercase'>댓글보기</button><button id='btnWriteComment-"+id+"' class='btn-reply text-uppercase' onclick='writeReply("+id+")'>댓글쓰기</button></div></div></div>";
         console.log(div);
         $(".comments-area").append(div);
         

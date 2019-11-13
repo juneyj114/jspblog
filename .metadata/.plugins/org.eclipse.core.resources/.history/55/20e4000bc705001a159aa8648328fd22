@@ -209,7 +209,6 @@ async function showReply(commentId) {
       });
       const replies = await fetchData.json();
       const childReply = document.createElement("div");
-      childReply.style.width = "100%"; 
       childReply.id = "childReply-" + commentId;
       $("#reply-" + commentId).append(childReply);
       for (const reply of replies) {

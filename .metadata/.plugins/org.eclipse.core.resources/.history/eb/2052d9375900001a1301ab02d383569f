@@ -1,0 +1,21 @@
+package com.cos.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.cos.model.Board;
+import com.cos.model.User;
+import com.cos.util.DBClose;
+import com.cos.util.Utils;
+
+public class CommentDAO {
+	
+	private PreparedStatement pstmt; // 쿼리문 작성 - 실행담당
+	private Connection conn;
+	private ResultSet rs;
+	
+	
+}

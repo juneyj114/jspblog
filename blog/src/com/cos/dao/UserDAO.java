@@ -1,0 +1,170 @@
+package com.cos.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+import com.cos.model.User;
+import com.cos.util.DBClose;
+
+public class UserDAO {
+	
+	private PreparedStatement pstmt; // 쿼리문 작성 - 실행담당
+	private Connection conn;
+	private ResultSet rs;
+	private int result;
+	
+	public int updateEmailValid(String email) {
+		final String SQL = "update user set mailValid = true where email = ?";
+		conn = DBConn.getConnection();
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, email);
+			result = pstmt.executeUpdate();
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(conn, pstmt);
+		}
+		return -1;
+	}
+	
+	public User findByUsername(String username) {
+		final String SQL = "SELECT * FROM user WHERE username = ?";
+		conn = DBConn.getConnection();
+		
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, username);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				User user = new User();
+				user.setId(rs.getInt("id"));
+				user.setUsername(rs.getString("username"));
+				user.setEmail(rs.getString("email"));
+				user.setCreateDate(rs.getTimestamp("createDate"));
+				user.setAddr(rs.getString("addr"));
+				user.setUserProfile(rs.getString("userProfile"));
+				return user;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally { 
+			DBClose.close(conn, pstmt, rs);
+		}
+		return null;
+	}
+	
+	public ArrayList<User> findByAll() {
+		// 1. DB 연결
+		final String SQL = "SELECT * FROM user";
+		ArrayList<User> users = new ArrayList<User>();
+		conn = DBConn.getConnection();
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+//			while(rs.next()) {
+//				User user = new User();
+//				user.setId(rs.getInt("id"));
+//				user.setTitle(rs.getString("title"));
+//				user.setContent(rs.getString("content"));
+//				users.add(user);
+//			}
+//			return users;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			
+		}
+		// 2. DB 쿼리 작성
+		// 3. DB 쿼리 완성
+		// 4. DB 쿼리 실행
+		return null;
+	}
+	
+	public int update(User user) {
+		final String SQL = "update user set password = ?, addr = ? where id = ?";
+		conn = DBConn.getConnection();
+		
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, user.getPassword());
+			pstmt.setString(2, user.getAddr());
+			pstmt.setInt(3, user.getId());
+			result = pstmt.executeUpdate();
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			System.out.println("close");
+			DBClose.close(conn, pstmt);
+		}
+		return -1;
+	}
+	
+	public void save(User user) {
+		final String SQL = "insert into user(username, password, email, createDate, addr) values(?, ?, ?, now(), ?)";
+		conn = DBConn.getConnection();
+		
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, user.getUsername());
+			pstmt.setString(2, user.getPassword());
+			pstmt.setString(3, user.getEmail());
+			pstmt.setString(4, user.getAddr());
+			result = pstmt.executeUpdate();
+//			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			System.out.println("close");
+			DBClose.close(conn, pstmt);
+		}
+//		return -1;
+	}
+	
+	public int result() {
+		return this.result;
+	}
+	
+	// result 0: 로그인실패 / 1: 로그인성공 / -1: 서버오류
+	public int findByUsernameAndPassword(String username, String password) {
+		final String SQL = "select count(id) from user where username = ? and password = ?";
+		conn = DBConn.getConnection();
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, username);
+			pstmt.setString(2, password);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(conn, pstmt, rs);
+		}
+		return -1;
+	}
+
+	public int updateProfile(User user) {
+		final String SQL = "update user set userProfile=? where username = ?";
+		conn = DBConn.getConnection();
+		
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, user.getUserProfile());
+			pstmt.setString(2, user.getUsername());
+			result = pstmt.executeUpdate();
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(conn, pstmt);
+		}
+		return -1;
+	}
+}

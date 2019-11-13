@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul class = "js-list">
+    </ul>
+    
+    <script>
+        const mainUl = document.querySelector(".js-list");
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.innerText= "Login";
+        a.classList.add("nav-link");
+        a.href = "/blog/user/login.jsp";
+        li.classList.add("nav-item");
+        li.appendChild(a);
+        mainUl.appendChild(li);
+    </script>
+</body>
+</html>

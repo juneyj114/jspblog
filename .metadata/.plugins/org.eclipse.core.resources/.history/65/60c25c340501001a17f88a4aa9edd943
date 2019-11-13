@@ -1,0 +1,9 @@
+package com.cos.model;
+
+public class ResponseData {
+	private int statusCode;
+	private String status;
+	private String statusMessage;
+}
+
+

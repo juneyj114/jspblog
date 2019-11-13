@@ -1,0 +1,40 @@
+<%@page import="java.util.Properties"%>
+<%@page import="com.cos.util.SHA256"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<% 
+	// 메일 전송
+	String to = request.getParameter("email");
+ 	String from = "acto2001@gmail.com";
+ 	String code = SHA256.getEncrypt(to, "cos");
+ 	
+ 	String subject = "이메일 인증용 이메일입니다.";
+ 	StringBuffer sb = new StringBuffer();
+ 	sb.append("다음 링크에 접속하여 이메일 인증을 진행해주세요.");
+ 	sb.append("<a href = 'http://localhost:8000/blog/test/gmailCheckAction.jsp?code="+code+"'>");
+ 	sb.append("이메일 인증하기</a>");
+ 	
+ 	// 설정 값
+ 	Properties p = new Properties();
+ 	p.put("mail.smtp.user", from);
+	p.put("mail.smtp.host", "smtp.googlemail.com");
+	p.put("mail.smtp.port", "465"); //TLS 587, SSL 465
+	p.put("mail.smtp.starttls.enable", "true");
+	p.put("mail.smtp.auth", "true");
+	p.put("mail.smtp.debug", "true");
+	p.put("mail.smtp.socketFactory.port", "465"); 
+	p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+	p.put("mail.smtp.sockerFactory.fallback", "false");
+ 	
+ 	// 정상 = 가만히. 비정상 = Back()
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>인증메일이 전송되었습니다.</h1>
+</body>
+</html>

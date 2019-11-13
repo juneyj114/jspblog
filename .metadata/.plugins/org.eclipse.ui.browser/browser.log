@@ -1,0 +1,31 @@
+
+10월 25, 2019 17:17:21.31 NEW SESSION
+10월 25, 2019 17:17:21.31 [3124:4248:1025/171721.282:ERROR:socket_stream.cc(218)] Closing stream with result -2
+10월 25, 2019 17:17:23.54 [3124:4248:1025/171723.546:ERROR:socket_stream.cc(218)] Closing stream with result -2
+10월 26, 2019 24:26:28.64 [3124:12008:1026/002628.640:ERROR:gcm_channel_status_request.cc(145)] GCM channel request failed.
+10월 26, 2019 24:26:33.90 [3124:10560:1026/002628.640:ERROR:get_updates_processor.cc(246)] PostClientToServerMessage() failed during GetUpdates
+10월 26, 2019 24:26:34.21 [3124:4248:1026/002628.640:ERROR:connection_factory_impl.cc(417)] Failed to connect to MCS endpoint with error -106
+10월 26, 2019 24:29:25.30 [3124:4248:1026/002925.307:ERROR:socket_stream.cc(218)] Closing stream with result -2
+10월 26, 2019 24:29:25.83 [3124:4248:1026/002925.838:ERROR:socket_stream.cc(218)] Closing stream with result -2
+10월 26, 2019 13:55:10.81 [3124:12008:1026/135510.815:ERROR:gcm_channel_status_request.cc(145)] GCM channel request failed.
+10월 26, 2019 13:55:10.85 [3124:10560:1026/135510.830:ERROR:get_updates_processor.cc(246)] PostClientToServerMessage() failed during GetUpdates
+10월 26, 2019 13:55:10.86 [3124:10560:1026/135510.836:ERROR:get_updates_processor.cc(246)] PostClientToServerMessage() failed during GetUpdates
+10월 26, 2019 13:55:15.36 [3124:4248:1026/135515.186:ERROR:connection_factory_impl.cc(417)] Failed to connect to MCS endpoint with error -106
+10월 26, 2019 14:25:39.31 [3124:4248:1026/142539.316:ERROR:socket_stream.cc(218)] Closing stream with result -2
+10월 26, 2019 14:25:39.98 [3124:4248:1026/142539.988:ERROR:socket_stream.cc(218)] Closing stream with result -2
+10월 27, 2019 24:14:29.71 [3124:12008:1027/001429.718:ERROR:gcm_channel_status_request.cc(145)] GCM channel request failed.
+10월 27, 2019 24:14:29.71 [3124:10560:1027/001429.718:ERROR:get_updates_processor.cc(246)] PostClientToServerMessage() failed during GetUpdates
+10월 27, 2019 24:14:29.73 [3124:10560:1027/001429.718:ERROR:get_updates_processor.cc(246)] PostClientToServerMessage() failed during GetUpdates
+10월 27, 2019 24:14:29.73 [3124:4248:1027/001429.718:ERROR:connection_factory_impl.cc(417)] Failed to connect to MCS endpoint with error -106
+10월 27, 2019 24:14:30.22 [3124:4248:1027/001430.225:ERROR:connection_factory_impl.cc(417)] Failed to connect to MCS endpoint with error -106
+10월 27, 2019 24:17:58.15 [3124:4248:1027/001758.159:ERROR:socket_stream.cc(218)] Closing stream with result -2
+10월 27, 2019 24:17:58.78 [3124:4248:1027/001758.784:ERROR:socket_stream.cc(218)] Closing stream with result -2
+10월 28, 2019 08:59:35.81 [3124:12008:1028/085935.813:ERROR:gcm_channel_status_request.cc(145)] GCM channel request failed.
+10월 28, 2019 08:59:40.37 [3124:4248:1028/085935.817:ERROR:checkin_request.cc(223)] Failed to get checkin response. Fetcher failed. Retrying.
+10월 28, 2019 08:59:40.93 [3124:10560:1028/085935.818:ERROR:get_updates_processor.cc(246)] PostClientToServerMessage() failed during GetUpdates
+10월 28, 2019 08:59:41.78 [3124:10560:1028/085935.820:ERROR:get_updates_processor.cc(246)] PostClientToServerMessage() failed during GetUpdates
+10월 28, 2019 08:59:41.92 [3124:4248:1028/085935.820:ERROR:connection_factory_impl.cc(417)] Failed to connect to MCS endpoint with error -106
+10월 28, 2019 08:59:42.20 [3124:4248:1028/085936.320:ERROR:connection_factory_impl.cc(417)] Failed to connect to MCS endpoint with error -106
+
+11월 08, 2019 12:42:00.48 NEW SESSION
+11월 08, 2019 12:42:00.48 [5948:1656:1108/124200.421:ERROR:socket_stream.cc(218)] Closing stream with result -2

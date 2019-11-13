@@ -1,0 +1,146 @@
+package com.cos.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.cos.model.Board;
+import com.cos.model.Comment;
+import com.cos.model.User;
+import com.cos.util.DBClose;
+import com.cos.util.Utils;
+
+public class CommentDAO {
+	
+	private PreparedStatement pstmt; // 쿼리문 작성 - 실행담당
+	private Connection conn;
+	private ResultSet rs;
+	
+	public List<Comment> findByBoardId(int boardId) {
+		final String SQL = "select c.id, c.userId, c.boardId, c.content, c.createDate, u.username, u.userProfile from comment c, user u where c.userId = u.id and boardId = ? and c.commentId is null";
+		List<Comment> comments = new ArrayList<Comment>();
+		conn = DBConn.getConnection();
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, boardId);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Comment comment = new Comment();
+				comment.setId(rs.getInt("c.id"));
+				comment.setUserId(rs.getInt("c.userId"));
+				comment.setBoardId(rs.getInt("c.boardId"));
+				comment.setContent(rs.getString("c.content"));
+				comment.setCreateDate(rs.getTimestamp("c.createDate"));
+				comment.getUser().setUsername(rs.getString("u.username"));
+				comment.getUser().setUserProfile(rs.getString("u.userProfile"));
+				comments.add(comment);
+			}
+			return comments;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBClose.close(conn, pstmt, rs);
+		}
+		return comments;
+		
+	}
+	
+	
+
+	public int delete(int commentId) {
+		final String SQL = "delete from comment where id = ?";
+		conn = DBConn.getConnection();
+		
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, commentId);
+			int result = pstmt.executeUpdate();
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(conn, pstmt);
+		}
+		return -1;
+	}
+
+	public int save(Comment comment) {
+		final String SQL = "insert into comment(userId, boardId, content, createDate, commentId) values(?, ?, ?, now(), ?)";
+		conn = DBConn.getConnection();
+		
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, comment.getUserId());
+			pstmt.setInt(2, comment.getBoardId());
+			pstmt.setString(3, comment.getContent());
+			String commentId = comment.getCommentId();
+			pstmt.setString(4, comment.getCommentId());
+			int result = pstmt.executeUpdate();
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(conn, pstmt);
+		}
+		return -1;
+	}
+
+	synchronized public Comment findByMaxId() {
+		final String SQL = "select c.id, c.userId, c.boardId, c.content, c.createDate, u.username from comment c, user u where c.userId = u.id and c.id = (select max(id) from comment)";
+		Comment comment = new Comment();
+		conn = DBConn.getConnection();
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				comment.setId(rs.getInt("c.id"));
+				comment.setUserId(rs.getInt("c.userId"));
+				comment.setBoardId(rs.getInt("c.boardId"));
+				comment.setContent(rs.getString("c.content"));
+				comment.setCreateDate(rs.getTimestamp("c.createDate"));
+				comment.getUser().setUsername(rs.getString("u.username"));
+				return comment;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBClose.close(conn, pstmt, rs);
+		}
+		return comment;
+	}
+
+
+
+	public List<Comment> show(int commentId) {
+		final String SQL = "select f.id, f.userId, f.boardId, f.content, f.createDate, f.commentId, u.username from comment f, comment p, user u where f.commentId=p.id and f.userId = u.id and f.commentId=?";
+		conn = DBConn.getConnection();
+		List<Comment> comments = new ArrayList<Comment>();
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, commentId);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Comment comment = new Comment();
+				comment.setId(rs.getInt("f.id"));
+				comment.setUserId(rs.getInt("f.userId"));
+				comment.setBoardId(rs.getInt("f.boardId"));
+				comment.setContent(rs.getString("f.content"));
+				comment.setCreateDate(rs.getTimestamp("f.createDate"));
+				comment.setCommentId(rs.getInt("f.commentId")+"");
+				comment.getUser().setUsername(rs.getString("u.username"));
+				comments.add(comment);
+			}
+			return comments;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(conn, pstmt, rs);
+		}
+		return null;
+	}
+	
+	
+}

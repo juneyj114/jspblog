@@ -1,0 +1,53 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<html>
+<%@ include file="/include/nav.jsp"%>
+
+<!--================Contact Area =================-->
+<section class="contact_area">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-2"></div>
+			<div class="col-lg-8">
+				<form class="row contact_form" action="/blog/user?&cmd=update" method="post" onsubmit="return validateCheck()">
+					
+					<div class="col-md-12">
+						<div class="form-group float-right">
+							<a class="blog_btn" onclick={goPopup()}>주소 찾기</a>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="form-group">
+							<label for="filename" class="blog_btn">이미지를 선택해주세요.</label>
+							<input type="file" id="filename" class="form-control" name="userProfile" hidden readonly >
+						</div>
+					</div>
+					<div class="col-md-12 text-right">
+						<button type="submit" value="submit" class="btn submit_btn">Update</button>
+					</div>
+				</form>
+			</div>
+			<div class="col-lg-2"></div>
+		</div>
+	</div>
+</section>
+<!--================Contact Area =================-->
+<script>
+      const imagePath = document.querySelector("#img__input");
+      imagePath.addEventListener("change", event => {
+        const f = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = e => {
+          const {
+            target: { result }
+          } = e;
+          console.log(result.length);
+          const imageContainer = document.querySelector("#ImageContainer");
+          const image = document.createElement("IMG");
+          image.setAttribute("src", result);
+          imageContainer.append(image);
+        };
+        reader.readAsDataURL(f);
+      });
+    </script>
+<%@ include file="/include/footer.jsp"%>
+</html>
